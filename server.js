@@ -1,22 +1,24 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const controller = require('./ComidasController')
+const controller = require('./MoradiasController')
 
 const servidor = express()
 servidor.use(cors())
 servidor.use(bodyParser.json())
 
-servidor.get('/comidas', (request, response) => {
-  response.send(controller.getAll())
+servidor.get('/moradias', async (request, response) => {
+  let moradias = await controller.index()
+  await console.log(moradias)
+  await response.status(200).send(moradias)
 })
 
-servidor.post('/comidas', (request, response) => {
-  const novaComida = controller.add(request.body)
-  response.status(200).send(novaComida)
+servidor.post('/moradias', (request, response) => {
+  const novaMoradia = controller.create(request.body)
+  response.status(200).send(novaMoradia)
 })
 
-servidor.patch('/comidas/:id', (request, response) => {
+servidor.patch('/moradias/:id', (request, response) => {
   const id = request.params.id
   const sucesso = controller.update(id, request.body)
   if(sucesso){
@@ -26,7 +28,7 @@ servidor.patch('/comidas/:id', (request, response) => {
   }
 })
 
-servidor.delete('/comidas/:id', (request, response) => {
+servidor.delete('/moradias/:id', (request, response) => {
   controller.remove(request.params.id)
   response.sendStatus(204)
 })

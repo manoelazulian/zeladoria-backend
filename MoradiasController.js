@@ -4,7 +4,9 @@ const Moradia = require('./MoradiaModel');
 connect();
 
 const index = () => {
-  return Moradia.where('_id').ne(null)
+  Moradia.find({}).then((moradias) => {
+    return moradias
+  });
 }
 
 const create = (params) => {
@@ -15,29 +17,12 @@ const create = (params) => {
 }
 
 const remove = (id) => {
-  comidas.pratosFavoritos = getAll().filter((comida) => {
-    return comida.id !== id
-  })
+  Moradia.deleteOne({id: id}, function (err) { return false })
+  return true
 }
 
-const update = (id, comida) => {
-  let comidaCadastrada = getAll().find(comida => {
-    return comida.id === id
-  })
-
-  if(comidaCadastrada === undefined){ // nao encontrou a comida
-    return false
-  }
-  else {
-    if(comida.nome !== undefined) {
-      comidaCadastrada.nome = comida.nome
-    }
-    if(comida.descricao !== undefined) {
-      comidaCadastrada.descricao = comida.descricao
-    }
-
-    return true
-  }
+const update = (id, moradia) => {
+  return Moradia.findOneAndUpdate({id: id}, moradia, function (err) { return false })
 }
 
 module.exports = {
