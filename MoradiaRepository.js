@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
-const MONGO_URL = process.env.MONGODB_URI
-// const MONGO_URL = "mongodb://localhost:27017/zeladoria";
+const MONGO_URL = process.env.MONGODB_URI || "mongodb://localhost:27017/zeladoria"
 
 function connect () {
   mongoose.connect(MONGO_URL,
