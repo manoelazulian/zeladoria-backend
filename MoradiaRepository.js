@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-// string de conexão:
-// mongodb://dominio:porta/nome_database
-const MONGO_URL = "mongodb://localhost:27017/zeladoria";
+const MONGO_URL = process.env.MONGODB_URI
+// const MONGO_URL = "mongodb://localhost:27017/zeladoria";
 
 function connect () {
   mongoose.connect(MONGO_URL,
@@ -17,4 +16,3 @@ function connect () {
 }
 
 module.exports = { connect }
-

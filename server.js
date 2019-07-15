@@ -1,9 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const PORT = process.env.PORT || 3000
 
 const moradiasController = require('./MoradiasController')
-const Moradia = require('./MoradiaModel');
 
 const servidor = express()
 servidor.use(cors())
@@ -45,5 +45,4 @@ servidor.delete('/moradias/:id', (request, response) => {
   response.sendStatus(204)
 })
 
-servidor.listen(3000)
-console.log("servidorzinho rodando na porta 3000")
+servidor.listen(PORT)
